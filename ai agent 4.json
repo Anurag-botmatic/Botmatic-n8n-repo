@@ -1,0 +1,1032 @@
+{
+  "name": "ai agent 4",
+  "nodes": [
+    {
+      "parameters": {
+        "batchSize": 167,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        816,
+        448
+      ],
+      "id": "84a55c16-1207-4e99-a949-8f77a01b72fc",
+      "name": "Loop Over Items2"
+    },
+    {
+      "parameters": {
+        "batchSize": 167,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        816,
+        64
+      ],
+      "id": "b503dcf9-5182-4ac5-8f84-0e974c77f10d",
+      "name": "Loop Over Items4"
+    },
+    {
+      "parameters": {
+        "batchSize": 167,
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        848,
+        848
+      ],
+      "id": "a07cbdbd-2203-419a-a745-ccde9f619e5f",
+      "name": "Loop Over Items5"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "5e8602d8-0181-4187-8048-2dff1a195acd",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1920,
+        432
+      ],
+      "id": "cfba0930-65ec-424d-95ed-7383df419ce8",
+      "name": "Webhook",
+      "webhookId": "5e8602d8-0181-4187-8048-2dff1a195acd"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "wZcEfd8VTLuA8GJG",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/wZcEfd8VTLuA8GJG",
+          "cachedResultName": "BOTMATIC AGENTS  — investorname sub 3"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        },
+        "options": {
+          "waitForSubWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        1136,
+        80
+      ],
+      "id": "0dd26cc6-4815-4988-8ef4-041a1a61a41c",
+      "name": "Call 'investorname sub 3'"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "GoAhzmquVQ3Rcg3A",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/GoAhzmquVQ3Rcg3A",
+          "cachedResultName": "BOTMATIC AGENTS  — fathername 3"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        1168,
+        464
+      ],
+      "id": "bd0ab84d-3896-4446-a6cf-db4a9db51f91",
+      "name": "Call 'investorname sub 3'1"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "DCSj4aEtCuUoCa3I",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/DCSj4aEtCuUoCa3I",
+          "cachedResultName": "BOTMATIC AGENTS  — address 3"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        1184,
+        864
+      ],
+      "id": "d019ca4f-4c4e-42e2-bb61-78ab51443de6",
+      "name": "Call 'investorname sub 3'2"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      rowData: $json.body?.rowData || []\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1248,
+        432
+      ],
+      "id": "e2ef01e6-20e8-423f-88b0-2ed1847b1c51",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM master_investor_data\nwhere batch_id = '{{ $('Code in JavaScript1').item.json.codeKey }}'\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        208,
+        64
+      ],
+      "id": "af410fa6-808b-440a-8d46-eb84aa6094f4",
+      "name": "Execute a SQL query1",
+      "credentials": {
+        "mySql": {
+          "id": "6RbPRG1CVSpGIGaZ",
+          "name": "MySQL account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM master_investor_data\nwhere batch_id = '{{ $('Code in JavaScript1').item.json.codeKey }}'\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        224,
+        848
+      ],
+      "id": "2ec96ee0-d951-46a8-86a1-bc0d40c3d8d6",
+      "name": "Execute a SQL query3",
+      "credentials": {
+        "mySql": {
+          "id": "6RbPRG1CVSpGIGaZ",
+          "name": "MySQL account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT\n    CASE\n        WHEN validation_status = 'done' THEN 'yes'\n        WHEN validation_status = 'pending' THEN 'false'\n        ELSE 'status_not_done_or_pending'\n    END AS check_result\nFROM\n    master_investor_data\nWHERE\n    internal_id = (\n        SELECT MAX(internal_id)\n        FROM master_investor_data\n        WHERE batch_id = '{{ $node[\"Code in JavaScript3\"].json[\"batchId\"] }}'\n    );\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.5,
+      "position": [
+        -1536,
+        1664
+      ],
+      "id": "c6055e27-77b8-4571-a4fb-14ec0dd80460",
+      "name": "Execute a SQL query4",
+      "credentials": {
+        "mySql": {
+          "id": "6RbPRG1CVSpGIGaZ",
+          "name": "MySQL account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "bc3edae6-998b-4ee9-8e6c-5892f87789be",
+              "leftValue": "={{ $json.check_result }}",
+              "rightValue": "=yes",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -848,
+        1664
+      ],
+      "id": "1d6c22dd-1c5b-4ee6-9352-9ace21401940",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch"
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        80,
+        1392
+      ],
+      "id": "4d6c4763-b8bc-4b31-9d0b-4d69d6090476",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "table": {
+          "__rl": true,
+          "value": "master_investor_data",
+          "mode": "list",
+          "cachedResultName": "master_investor_data"
+        },
+        "dataMode": "defineBelow",
+        "valuesToSend": {
+          "values": [
+            {
+              "column": "Sr No",
+              "value": "={{ $json['Sr No'] || null }}"
+            },
+            {
+              "column": "Company ID",
+              "value": "={{ $json['Company ID'] || null }}"
+            },
+            {
+              "column": "Investor Record Id",
+              "value": "={{ $json[\"Investor Record Id\"] }}"
+            },
+            {
+              "column": "Customer ID",
+              "value": "={{ $json['Customer ID'] || null }}"
+            },
+            {
+              "column": "Customer Name",
+              "value": "={{ $json['Customer Name'] || null }}"
+            },
+            {
+              "column": "Company Name",
+              "value": "={{ $json['Company Name'] || null }}"
+            },
+            {
+              "column": "Investor Full Name",
+              "value": "={{ $json['Investor Full Name'] || null }}"
+            },
+            {
+              "column": "Investor First Name",
+              "value": "={{ $json['Investor First Name'] || null }}"
+            },
+            {
+              "column": "Investor Middle Name",
+              "value": "={{ $json['Investor Middle Name'] || null }}"
+            },
+            {
+              "column": "Investor Last Name",
+              "value": "={{ $json['Investor Last Name'] || null }}"
+            },
+            {
+              "column": "Father Full Name",
+              "value": "={{ $json['Father Full Name'] || null }}"
+            },
+            {
+              "column": "Father First Name",
+              "value": "={{ $json['Father First Name'] || null }}"
+            },
+            {
+              "column": "Father Middle Name",
+              "value": "={{ $json['Father Middle Name'] || null }}"
+            },
+            {
+              "column": "Father Last Name",
+              "value": "={{ $json['Father Last Name'] || null }}"
+            },
+            {
+              "column": "Address",
+              "value": "={{ $json['Address'] || null }}"
+            },
+            {
+              "column": "Country",
+              "value": "={{ $json['Country'] || null }}"
+            },
+            {
+              "column": "State",
+              "value": "={{ $json['State'] || null }}"
+            },
+            {
+              "column": "District",
+              "value": "={{ $json['District'] || null }}"
+            },
+            {
+              "column": "Pin Code",
+              "value": "={{ $json['Pin Code'] || null }}"
+            },
+            {
+              "column": "Full Address Consolidation",
+              "value": "={{ $json['Full Address Consolidation'] || null }}"
+            },
+            {
+              "column": "Folio Number",
+              "value": "={{ $json['Folio Number'] || null }}"
+            },
+            {
+              "column": "Dp-Id",
+              "value": "={{ $json['Dp-Id'] || null }}"
+            },
+            {
+              "column": "Investment Type",
+              "value": "={{ $json['Investment Type'] || null }}"
+            },
+            {
+              "column": "Unclaimed Shares",
+              "value": "={{ $json['Unclaimed Shares'] || null }}"
+            },
+            {
+              "column": "Proposed Date Of Tfr",
+              "value": "={{ $json['Proposed Date Of Tfr'] || null }}"
+            },
+            {
+              "column": "Pan Card",
+              "value": "={{ $json['Pan Card'] || null }}"
+            },
+            {
+              "column": "Date Of Birth",
+              "value": "={{ $json['Date Of Birth'] || null }}"
+            },
+            {
+              "column": "Aadhar Number",
+              "value": "={{ $json['Aadhar Number'] || null }}"
+            },
+            {
+              "column": "Nominee Full Name",
+              "value": "={{ $json['Nominee Full Name'] || null }}"
+            },
+            {
+              "column": "Nominee First Name",
+              "value": "={{ $json['Nominee First Name'] || null }}"
+            },
+            {
+              "column": "Nominee Middle Name",
+              "value": "={{ $json['Nominee Middle Name'] || null }}"
+            },
+            {
+              "column": "Nominee Last Name",
+              "value": "={{ $json['Nominee Last Name'] || null }}"
+            },
+            {
+              "column": "Joint Holder Name",
+              "value": "={{ $json['Joint Holder Name'] || null }}"
+            },
+            {
+              "column": "Joint Holder First Name",
+              "value": "={{ $json['Joint Holder First Name'] || null }}"
+            },
+            {
+              "column": "Joint Holder Middle Name",
+              "value": "={{ $json['Joint Holder Middle Name'] || null }}"
+            },
+            {
+              "column": "Joint Holder Last Name",
+              "value": "={{ $json['Joint Holder Last Name'] || null }}"
+            },
+            {
+              "column": "Joint Holder First Name 2",
+              "value": "={{ $json['Joint Holder First Name 2'] || null }}"
+            },
+            {
+              "column": "Is Invest Litigation",
+              "value": "={{ $json['Is Invest Litigation'] || null }}"
+            },
+            {
+              "column": "Is Share Transfer To Suspense Account",
+              "value": "={{ $json['Is Share Transfer To Suspense Account'] || null }}"
+            },
+            {
+              "column": "Market Value",
+              "value": "={{ $json['Market Value'] || null }}"
+            },
+            {
+              "column": "Data Validation Assign Date",
+              "value": "={{ $json['Data Validation Assign Date'] || null }}"
+            },
+            {
+              "column": "Data Validation Ageing",
+              "value": "={{ $json['Data Validation Ageing'] || null }}"
+            },
+            {
+              "column": "Data Validation Team Name",
+              "value": "={{ $json['Data Validation Team Name'] || null }}"
+            },
+            {
+              "column": "Data Validation Status Date",
+              "value": "={{ $json['Data Validation Status Date'] || null }}"
+            },
+            {
+              "column": "Data Validation Status",
+              "value": "={{ $json['Data Validation Status'] || null }}"
+            },
+            {
+              "column": "Data Validation Remarks",
+              "value": "={{ $json['Data Validation Remarks'] || null }}"
+            },
+            {
+              "column": "Admin Status",
+              "value": "={{ $json['Admin Status'] || null }}"
+            },
+            {
+              "column": "Admin Remarks",
+              "value": "={{ $json['Admin Remarks'] || null }}"
+            },
+            {
+              "column": "Updated Investor Name",
+              "value": "={{ $json['Updated Investor Name'] || null }}"
+            },
+            {
+              "column": "Updated Address",
+              "value": "={{ $json['Updated Address'] || null }}"
+            },
+            {
+              "column": "Updated Country",
+              "value": "={{ $json['Updated Country'] || null }}"
+            },
+            {
+              "column": "Updated State",
+              "value": "={{ $json['Updated State'] || null }}"
+            },
+            {
+              "column": "Updated District",
+              "value": "={{ $json['Updated District'] || null }}"
+            },
+            {
+              "column": "Updated Pin Code",
+              "value": "={{ $json['Updated Pin Code'] || null }}"
+            },
+            {
+              "column": "Updated No of Shares",
+              "value": "={{ $json['Updated No of Shares'] || null }}"
+            },
+            {
+              "column": "Share Price",
+              "value": "={{ $json['Share Price'] || null }}"
+            },
+            {
+              "column": "Update Market Value",
+              "value": "={{ $json['Update Market Value'] || null }}"
+            },
+            {
+              "column": "Address Indexation",
+              "value": "={{ $json['Address Indexation'] || null }}"
+            },
+            {
+              "column": "Branch",
+              "value": "={{ $json['Branch'] || null }}"
+            },
+            {
+              "column": "Batch No",
+              "value": "={{ $json['Batch No'] || null }}"
+            },
+            {
+              "column": "batch_id",
+              "value": "={{ $json.codeKey || null }}"
+            },
+            {
+              "column": "ai_validation_reason",
+              "value": "={{ $json.ai_validation_reason || null }}"
+            },
+            {
+              "column": "cleaned_investor_first_name",
+              "value": "={{ $json.cleaned_investor_first_name || null }}"
+            },
+            {
+              "column": "cleaned_investor_middle_name",
+              "value": "={{ $json.cleaned_investor_middle_name || null }}"
+            },
+            {
+              "column": "cleaned_investor_last_name",
+              "value": "={{ $json.cleaned_investor_last_name || null }}"
+            },
+            {
+              "column": "cleaned_father_first_name",
+              "value": "={{ $json.cleaned_father_first_name || null }}"
+            },
+            {
+              "column": "cleaned_father_middle_name",
+              "value": "={{ $json.cleaned_father_middle_name || null }}"
+            },
+            {
+              "column": "cleaned_father_last_name",
+              "value": "={{ $json.cleaned_father_last_name || null }}"
+            },
+            {
+              "column": "cleaned_address_formatted",
+              "value": "={{ $json.cleaned_address_formatted || null }}"
+            },
+            {
+              "column": "cleaned_address_pincode",
+              "value": "={{ $json.cleaned_address_pincode || null }}"
+            },
+            {
+              "column": "cleaned_address_state",
+              "value": "={{ $json.cleaned_address_state || null }}"
+            },
+            {
+              "column": "cleaned_address_district",
+              "value": "={{ $json.cleaned_address_district || null }}"
+            },
+            {
+              "column": "is_address_valid",
+              "value": "={{ $json.is_address_valid || null }}"
+            },
+            {
+              "column": "is_investor_name_valid",
+              "value": "={{ $json.is_investor_name_valid || null }}"
+            },
+            {
+              "column": "processing_status",
+              "value": "pending"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        -368,
+        432
+      ],
+      "id": "6dbd1009-c082-4164-8e8a-125673ea87b0",
+      "name": "Insert rows in a table",
+      "credentials": {
+        "mySql": {
+          "id": "6RbPRG1CVSpGIGaZ",
+          "name": "MySQL account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM master_investor_data\nwhere batch_id = '{{ $('Code in JavaScript1').item.json.codeKey }}'\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        96,
+        448
+      ],
+      "id": "3c501d31-3599-40ec-ab1c-8f52817b1994",
+      "name": "Execute a SQL query5",
+      "credentials": {
+        "mySql": {
+          "id": "6RbPRG1CVSpGIGaZ",
+          "name": "MySQL account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * \nFROM master_investor_data\nWHERE batch_id  = '{{ $json.batchId }}'\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.5,
+      "position": [
+        352,
+        1392
+      ],
+      "id": "82c4963c-8d5d-4048-b7ec-07c3bc580625",
+      "name": "Execute a SQL query6",
+      "credentials": {
+        "mySql": {
+          "id": "6RbPRG1CVSpGIGaZ",
+          "name": "MySQL account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 15
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -736,
+        2000
+      ],
+      "id": "805abfa6-ede1-4a27-9b19-342e5a9ecdfc",
+      "name": "Wait1",
+      "webhookId": "ebd89fac-a335-4900-b6fe-1853e21320da",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get rowData array (from the first item)\nconst rows = $json.rowData || [];\n\n// Flatten rowData → each record becomes its own item\nreturn rows.map(record => ({\n  json: record\n}));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -784,
+        432
+      ],
+      "id": "56ca6428-357e-474c-86de-b5dff2d6397c",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      recordId: 0,\n      agentCode: $input.first().json.batch_id,\n      isDataAICleaned: true\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        592,
+        1392
+      ],
+      "id": "96c40da5-287b-4199-a23e-da25b3945413",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://182.70.117.159:1125/api/FileAssignment/InsertAndUpdateAiAssignment",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"recordId\": 0,\n  \"agentCode\":\"{{ $json.agentCode }}\" ,\n    \"userId\": {{ Number($json.agentCode.split('-').pop()) }},\n  \"isDataAICleaned\": true,\n  \"recivedAt\": \"{{ new Date().toISOString() }}\"\n\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        912,
+        1392
+      ],
+      "id": "657eb9af-3f3b-41f6-9fb2-0e7408c9879f",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"processing\",\n  \"jobId\": \"={{ $json.codeKey || $json.batchId || $json.id }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -1712,
+        432
+      ],
+      "id": "902be0c7-f12b-4434-958c-9f5a2188085a",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "const codeKey = items[0].json.codeKey;\n\nreturn [\n  {\n    json: {\n      batchId: codeKey\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1328,
+        1120
+      ],
+      "id": "c8beaa0f-671f-4d55-97a6-f5c21d4f2c27",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const codeKey = items[0].json.codeKey;\n\nreturn [\n  {\n    json: {\n      batchId: codeKey\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -832,
+        1392
+      ],
+      "id": "f1c5e58d-34e5-439a-9216-3f560c0e73c7",
+      "name": "Code in JavaScript4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items4": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Call 'investorname sub 3'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'investorname sub 3'": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items2": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Call 'investorname sub 3'1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'investorname sub 3'1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items5": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Call 'investorname sub 3'2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'investorname sub 3'2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query4": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert rows in a table": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query5",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execute a SQL query1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execute a SQL query3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query6": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query5": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript4": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "149608ec-e2f5-44a3-9ed2-5269e5293a9a",
+  "meta": {
+    "instanceId": "b4014ee051fd78e43ccc9e0ba058ceb98ba0002058297943e9f1838316385f97"
+  },
+  "id": "Rn13q9Jbk1E3HjYv",
+  "tags": []
+}

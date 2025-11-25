@@ -1,0 +1,131 @@
+{
+  "name": "All Agent data Response",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "// n8n Function Node\n// Input: $input.all() gives all incoming items\n\n// Define the key from where you want to start keeping data\nconst startKey = \"Sr No\";\n\n// Map through all items\nreturn $input.all().map(item => {\n    const json = item.json;\n    const keys = Object.keys(json);\n    const startIndex = keys.indexOf(startKey);\n    \n    let newData = {};\n    if (startIndex !== -1) {\n        for (let i = startIndex; i < keys.length; i++) {\n            const key = keys[i];\n            newData[key] = json[key];\n        }\n    }\n    \n    return { json: newData };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -32,
+        -80
+      ],
+      "id": "3e24cfe1-ce3e-4247-8730-bb8462a1251f",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "00e98052-e723-4e38-8f07-04592b466e36",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -464,
+        -80
+      ],
+      "id": "72dce29d-1274-410a-a34d-bcee7f10ec26",
+      "name": "Webhook",
+      "webhookId": "00e98052-e723-4e38-8f07-04592b466e36"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "table": {
+          "__rl": true,
+          "value": "master_investor_data",
+          "mode": "list",
+          "cachedResultName": "master_investor_data"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "batch_id",
+              "value": "={{ $json.body.batch_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.5,
+      "position": [
+        -240,
+        -80
+      ],
+      "id": "76c27be4-fbce-4e02-bd98-e00d6f64e03f",
+      "name": "Select rows from a table",
+      "credentials": {
+        "mySql": {
+          "id": "6RbPRG1CVSpGIGaZ",
+          "name": "MySQL account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        176,
+        -80
+      ],
+      "id": "9a07fd41-810e-433c-9261-ce6349ba278d",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Select rows from a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2a295a13-5d44-4ba0-9671-f0edab12cf87",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b4014ee051fd78e43ccc9e0ba058ceb98ba0002058297943e9f1838316385f97"
+  },
+  "id": "e5xFPibkHQ8t4D40",
+  "tags": []
+}
